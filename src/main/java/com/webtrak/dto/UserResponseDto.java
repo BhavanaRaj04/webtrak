@@ -1,58 +1,28 @@
-package com.webtrak.entity;
+package com.webtrak.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class UserResponseDto {
 
-    @Id
-    @GeneratedValue
     private UUID id;
-
-    @Column(name = "employee_id", unique = true, nullable = false)
     private String employeeId;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(nullable = false)
-    private String password; // hashed
-
-    @Column(nullable = false)
-    private String role; // ADMIN, HR, MANAGER, EMPLOYEE, INTERN
-
-    @Column(nullable = false)
-    private String status; // ACTIVE, INACTIVE
-
+    private String role;
+    private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    @Column(name = "created_by")
     private UUID createdBy;
-
-    @Column(name = "updated_by")
     private UUID updatedBy;
 
-    @PrePersist
-    public void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
-    /* getters & setters */
+    // getters & setters
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getEmployeeId() {
@@ -79,14 +49,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
@@ -107,8 +69,16 @@ public class User {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public UUID getCreatedBy() {

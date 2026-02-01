@@ -4,6 +4,9 @@ import com.webtrak.entity.User;
 import com.webtrak.service.UserService;
 import com.webtrak.util.JwtUtil;
 import com.webtrak.util.PasswordUtil;
+import com.webtrak.exception.InactiveUserException;
+import com.webtrak.exception.InvalidCredentialsException;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -23,17 +26,18 @@ public class AuthController {
 
         User user = service.getByEmail(req.get("email"));
 
-        if (!user.getStatus().equals("ACTIVE"))
-            throw new RuntimeException("User inactive");
+        if (!user.getStatus().equals("ACTIVE")) {
+            throw new InactiveUserException("User account is inactive");
+        }
 
-        if (!PasswordUtil.matches(req.get("password"), user.getPassword()))
-            throw new RuntimeException("Invalid credentials");
+        if (!PasswordUtil.matches(req.get("password"), user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid email or password");
+        }
 
         String token = JwtUtil.generate(
                 user.getId().toString(),
                 user.getEmail(),
-                user.getRole()
-        );
+                user.getRole());
 
         return Map.of("token", token);
     }
