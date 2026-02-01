@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d5vev7npm1nc73chk5t0-a:5432/webtrack_db
+    url: jdbc:postgresql://dpg-d5vev7npm1nc73chk5t0-a.oregon-postgres.render.com:5432/webtrack_db?sslmode=require
     username: webtrack_db_user
     password: QaJyrKxha0c1DhS5RlxM6rrCI6dJvSho
     driver-class-name: org.postgresql.Driver
