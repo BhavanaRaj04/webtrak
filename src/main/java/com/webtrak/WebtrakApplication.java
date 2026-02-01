@@ -1,4 +1,4 @@
-package com.webtrak.webtrak;
+package com.webtrak;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
