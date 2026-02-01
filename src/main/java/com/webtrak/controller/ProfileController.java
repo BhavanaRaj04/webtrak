@@ -30,12 +30,9 @@ public class ProfileController {
             HttpServletRequest request,
             @RequestBody Map<String, String> body) {
                 
-        System.out.println("hi");
         UUID userId = UUID.fromString(
                 request.getAttribute("userId").toString());
 
-        System.out.println("hi");
-        System.out.println(userId);
 
         service.changeOwnPassword(
                 userId,
